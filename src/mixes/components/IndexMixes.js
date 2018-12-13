@@ -2,7 +2,8 @@ import React, { component } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig.js'
-import api from '../api.js'
+import NewMix from './NewMix.js'
+import UpdateMix from './UpdateMix.js'
 
 class IndexMixes extends React.Component {
   constructor(props) {
@@ -14,13 +15,12 @@ class IndexMixes extends React.Component {
   }
   async componentDidMount() {
     const response = await axios.get(apiUrl + '/mixes', {headers: {'Authorization': `Token token=${this.state.user.token}`}})
-    console.log(response)
     this.setState({mixes: response.data.mixes})
   }
 
   async deleteMix(event, mixId) {
     event.preventDefault()
-    await axios.delete(apiUrl + '/mixes' + `${mixId}`)
+    await axios.delete(apiUrl + '/mixes/' + `${mixId}`, {headers: {'Authorization': `Token token=${this.state.user.token}`}})
     this.setState({mixes: this.state.mixes.filter(mix => mix.id !== mixId)})
   }
 

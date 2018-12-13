@@ -9,6 +9,9 @@ import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
 import IndexMixes from './mixes/components/IndexMixes'
+import NewMix from './mixes/components/NewMix'
+import UpdateMix from './mixes/components/UpdateMix'
+import ShowMix from './mixes/components/ShowMix'
 
 class App extends Component {
   constructor () {
@@ -54,6 +57,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword flash={this.flash} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/mixes/:id/update' component={UpdateMix} render={() => (
+            <UpdateMix flash={this.flash} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/NewMix' render={() => (
+            <NewMix flash={this.flash} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/mixes' render={() => (
             <IndexMixes flash={this.flash} user={user} />
